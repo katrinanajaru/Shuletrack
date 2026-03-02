@@ -75,9 +75,6 @@ create table if not exists timetable_lessons (
   created_at timestamptz not null default now()
 );
 
-create unique index if not exists timetable_lessons_unique_slot_idx
-  on timetable_lessons (class_id, day_of_week, start_time, end_time);
-
 create table if not exists timetable_history (
   id uuid primary key default gen_random_uuid(),
   class_id uuid not null references classes(id) on delete cascade,
