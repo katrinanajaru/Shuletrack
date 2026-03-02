@@ -121,11 +121,21 @@ export default function Layout() {
     <div className="app-shell">
       {!!successMessage && (
         <div className="modal-backdrop" role="dialog" aria-modal="true">
-          <div className="modal-card">
-            <h3>Success</h3>
-            <p className="muted">{successMessage}</p>
-            <div className="inline-form">
-              <button className="btn" type="button" onClick={() => setSuccessMessage("")}>
+          <div className="modal-card success-modal-card">
+            <div className="success-modal-head">
+              <h3>Success</h3>
+              <button
+                className="success-modal-close"
+                type="button"
+                aria-label="Close success message"
+                onClick={() => setSuccessMessage("")}
+              >
+                x
+              </button>
+            </div>
+            <p className="success-modal-message">{successMessage}</p>
+            <div className="success-modal-actions">
+              <button className="btn btn-success-ok" type="button" onClick={() => setSuccessMessage("")}>
                 OK
               </button>
             </div>

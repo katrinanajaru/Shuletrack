@@ -116,6 +116,20 @@ async function ensureSchema() {
   await pool.query("alter table if exists grade_settings add column if not exists d_minus_min numeric(5,2) not null default 30");
   await pool.query("alter table if exists timetable_lessons drop constraint if exists timetable_lessons_day_of_week_check");
   await pool.query(`
+    with ranked as (
+      select
+        id,
+        row_number() over (
+          partition by class_id, day_of_week, start_time, end_time
+          order by created_at asc, id asc
+        ) as row_num
+      from timetable_lessons
+    )
+    delete from timetable_lessons t
+    using ranked r
+    where t.id = r.id and r.row_num > 1
+  `);
+  await pool.query(`
     create unique index if not exists timetable_lessons_unique_slot_idx
     on timetable_lessons (class_id, day_of_week, start_time, end_time)
   `);
