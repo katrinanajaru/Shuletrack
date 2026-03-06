@@ -278,32 +278,33 @@ export default function AuthPage() {
                     ? "Generate Reset Code"
                     : "Reset Password"}
           </button>
+          {mode === "login" && (
+            <button
+              type="button"
+              className="btn btn-ghost auth-forgot-inline"
+              onClick={() => {
+                setMode("forgot");
+                setError("");
+                setPassword("");
+              }}
+            >
+              Forgot password?
+            </button>
+          )}
         </form>
         <div className="auth-switch-stack">
           {mode === "login" && (
-            <>
-              <button
-                className="btn btn-ghost auth-switch"
-                onClick={() => {
-                  setMode("forgot");
-                  setError("");
-                  setPassword("");
-                }}
-              >
-                Forgot password?
-              </button>
-              <button
-                className="btn btn-ghost auth-switch"
-                onClick={() => {
-                  setMode("register");
-                  setError("");
-                  setPassword("");
-                  setConfirmPassword("");
-                }}
-              >
-                Don't have an account? Register
-              </button>
-            </>
+            <button
+              className="btn btn-ghost auth-switch"
+              onClick={() => {
+                setMode("register");
+                setError("");
+                setPassword("");
+                setConfirmPassword("");
+              }}
+            >
+              Don't have an account? Register
+            </button>
           )}
           {mode === "register" && (
             <button

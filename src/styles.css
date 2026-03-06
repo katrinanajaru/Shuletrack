@@ -914,6 +914,15 @@ td {
   padding: 12px;
 }
 
+.auth-forgot-inline {
+  margin-top: -4px;
+  justify-self: center;
+  width: auto;
+  font-size: 0.96rem;
+  font-weight: 700;
+  padding: 4px 8px;
+}
+
 .auth-switch {
   margin-top: 14px;
   width: 100%;
